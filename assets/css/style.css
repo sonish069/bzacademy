@@ -7,3 +7,113 @@
 html{
     overflow-x: hidden;
 }
+
+
+/* Steps List */
+.steps-list {
+    list-style: none;
+}
+
+/* Individual Step Item */
+.step-item {
+    position: relative; /* Context for absolute number */
+    background-color: #fff;
+    border-radius: 18px; /* Slightly more rounded */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    margin-bottom: 65px; /* Space between items, adjusted for number height */
+    z-index: 1; /* Base stacking */
+}
+
+/* Ensure stacking order */
+.step-item.step-1 { z-index: 3; }
+.step-item.step-2 { z-index: 2; }
+.step-item.step-3 { z-index: 1; }
+
+/* Last item doesn't need as much bottom margin */
+.steps-list li:last-child {
+    margin-bottom: 20px;
+}
+
+
+/* Step-specific positioning and colors */
+.step-1 { --step-color: #a87ed5; --step-base-color: #9c6acd; }
+.step-1 .step-number-container { right: 50px; }
+
+.step-2 { --step-color: #5caee3; --step-base-color: #4fa1d5; }
+.step-2 .step-number-container { left: 50px; }
+
+.step-3 { --step-color: #f29388; --step-base-color: #ec7e70; }
+.step-3 .step-number-container { right: 50px; }
+
+
+/* Step Content (inside white box) */
+.step-content {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Icon | Details | Label */
+    align-items: center;
+    padding: 25px 35px; /* Internal padding */
+    gap: 25px; /* Space between columns */
+    min-height: 100px; /* Ensure minimum height */
+}
+
+/* Step Icon */
+.step-icon {
+    color: #bdc3c7; /* Light grey icon */
+}
+.step-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke-width: 1.5px;
+}
+
+/* Step Details (Title + Description) */
+.step-details {
+    text-align: left;
+}
+
+
+
+/* Step Label (STEP XX) */
+
+
+.step-label-number {
+    display: block; /* Put number on new line */
+    font-size: 1.9em;
+    font-weight: 600;
+    margin-top: 5px;
+    color: var(--step-color); /* Use the step's main color */
+}
+
+
+/* Responsive Adjustments (Example) */
+@media (max-width: 600px) {
+   
+    
+    .step-content {
+        grid-template-columns: 1fr auto; /* Stack icon above details, keep label right */
+        grid-template-rows: auto auto;
+        gap: 15px 20px;
+        padding: 20px;
+        align-items: start; /* Align items top */
+    }
+    .step-icon {
+       grid-row: 1 / 2;
+       grid-column: 1 / 2;
+       justify-self: start; /* Align icon left */
+       padding-bottom: 5px;
+    }
+     .step-details {
+       grid-row: 2 / 3;
+       grid-column: 1 / 3; /* Span full width below icon */
+       padding-right: 0; /* Remove padding potentially added by grid gap */
+    }
+    .step-label {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3; /* Top right */
+        align-self: center; /* Vertically center label */
+    }
+
+    .step-item {
+        margin-bottom: 55px;
+    }
+}
